@@ -57,6 +57,7 @@ namespace LocadoraVeiculos.Controllers
         {
             if (ModelState.IsValid)
             {
+                aluguel.Carro.Status = StatusCarro.Reservado;
                 db.Alugueis.Add(aluguel);
                 db.SaveChanges();
                 return RedirectToAction("Index");

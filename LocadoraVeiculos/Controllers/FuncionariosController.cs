@@ -128,10 +128,15 @@ namespace LocadoraVeiculos.Controllers
             {
                 var retFuncionario = db.Funcionarios.FirstOrDefault(x =>
                     x.Email.Equals(funcionario.Email) && x.Senha.Equals(funcionario.Senha));
-                if ((retFuncionario != null && retFuncionario.Id > 0)
-                    || (funcionario.Email == "admin@admin.com.br" && funcionario.Senha == "admin"))
+                if (retFuncionario != null && retFuncionario.Id > 0)
                 {
-                    HttpContext.Session["LOCADORAUSER"] = retFuncionario;
+                    Session["LOCADORAUSER"] = retFuncionario;
+                    return RedirectToAction("Index", "Home");
+                }
+                if (funcionario.Email == "admin@admin.com.br" && funcionario.Senha == "admin")
+                {
+                    funcionario.Nome = "Administrador";
+                    Session["LOCADORAUSER"] = funcionario;
                     return RedirectToAction("Index", "Home");
                 }
                 else

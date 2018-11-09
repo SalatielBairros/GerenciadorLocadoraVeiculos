@@ -8,6 +8,7 @@ namespace LocadoraVeiculos.Models
     {
         [Key]
         public int Id { get; set; }
+        [DataType(DataType.Date)]
         [Required]
         public DateTime Data { get; set; } = DateTime.Now;
         [Required]
