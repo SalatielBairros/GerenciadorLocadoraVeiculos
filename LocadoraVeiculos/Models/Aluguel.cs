@@ -19,6 +19,5 @@ namespace LocadoraVeiculos.Models
         public int ClienteId { get; set; }
         public virtual Cliente Cliente { get; set; }
         public StatusAluguel Status { get; set; }
-
     }
 }

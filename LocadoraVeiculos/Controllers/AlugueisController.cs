@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using LocadoraVeiculos.Infra;
 using LocadoraVeiculos.Models;
+using LocadoraVeiculos.Security;
 
 namespace LocadoraVeiculos.Controllers
 {
@@ -38,6 +39,7 @@ namespace LocadoraVeiculos.Controllers
         }
 
         // GET: Alugueis/Create
+        [SessionAuthorize]
         public ActionResult Create()
         {
             ViewBag.CarroId = new SelectList(db.Carros, "Id", "Modelo");
@@ -49,6 +51,7 @@ namespace LocadoraVeiculos.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [SessionAuthorize]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Data,CarroId,ClienteId,Status")] Aluguel aluguel)
         {
@@ -65,6 +68,7 @@ namespace LocadoraVeiculos.Controllers
         }
 
         // GET: Alugueis/Edit/5
+        [SessionAuthorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -86,6 +90,7 @@ namespace LocadoraVeiculos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionAuthorize]
         public ActionResult Edit([Bind(Include = "Id,Data,CarroId,ClienteId,Status")] Aluguel aluguel)
         {
             if (ModelState.IsValid)
@@ -100,6 +105,7 @@ namespace LocadoraVeiculos.Controllers
         }
 
         // GET: Alugueis/Delete/5
+        [SessionAuthorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -117,6 +123,7 @@ namespace LocadoraVeiculos.Controllers
         // POST: Alugueis/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [SessionAuthorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Aluguel aluguel = db.Alugueis.Find(id);

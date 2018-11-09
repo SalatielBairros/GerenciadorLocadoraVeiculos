@@ -8,119 +8,144 @@ using System.Web;
 using System.Web.Mvc;
 using LocadoraVeiculos.Infra;
 using LocadoraVeiculos.Models;
-using LocadoraVeiculos.Security;
 
 namespace LocadoraVeiculos.Controllers
 {
-    public class CarrosController : Controller
+    public class FuncionariosController : Controller
     {
         private Context db = new Context();
 
-        // GET: Carroes
+        // GET: Funcionarios
         public ActionResult Index()
         {
-            return View(db.Carros.ToList());
+            return View(db.Funcionarios.ToList());
         }
 
-        // GET: Carroes/Details/5
+        // GET: Funcionarios/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Carro carro = db.Carros.Find(id);
-            if (carro == null)
+            Funcionario funcionario = db.Funcionarios.Find(id);
+            if (funcionario == null)
             {
                 return HttpNotFound();
             }
-            return View(carro);
+            return View(funcionario);
         }
 
-        [SessionAuthorize]
-        // GET: Carroes/Create
+        // GET: Funcionarios/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Carroes/Create
+        // POST: Funcionarios/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [SessionAuthorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Modelo,Marca,Tipo,ValorDiaria,Placa,Cor,Ano,Chassi,Quilomeatragem")] Carro carro)
+        public ActionResult Create([Bind(Include = "Id,Nome,Email,Senha")] Funcionario funcionario)
         {
             if (ModelState.IsValid)
             {
-                db.Carros.Add(carro);
+                db.Funcionarios.Add(funcionario);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(carro);
+            return View(funcionario);
         }
 
-        // GET: Carroes/Edit/5
-        [SessionAuthorize]
+        // GET: Funcionarios/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Carro carro = db.Carros.Find(id);
-            if (carro == null)
+            Funcionario funcionario = db.Funcionarios.Find(id);
+            if (funcionario == null)
             {
                 return HttpNotFound();
             }
-            return View(carro);
+            return View(funcionario);
         }
 
-        // POST: Carroes/Edit/5
+        // POST: Funcionarios/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [SessionAuthorize]
-        public ActionResult Edit([Bind(Include = "Id,Modelo,Marca,Tipo,ValorDiaria,Placa,Cor,Ano,Chassi,Quilomeatragem")] Carro carro)
+        public ActionResult Edit([Bind(Include = "Id,Nome,Email,Senha")] Funcionario funcionario)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(carro).State = EntityState.Modified;
+                db.Entry(funcionario).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(carro);
+            return View(funcionario);
         }
 
-        // GET: Carroes/Delete/5
-        [SessionAuthorize]
+        // GET: Funcionarios/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Carro carro = db.Carros.Find(id);
-            if (carro == null)
+            Funcionario funcionario = db.Funcionarios.Find(id);
+            if (funcionario == null)
             {
                 return HttpNotFound();
             }
-            return View(carro);
+            return View(funcionario);
         }
 
-        // POST: Carroes/Delete/5
+        // POST: Funcionarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [SessionAuthorize]
         public ActionResult DeleteConfirmed(int id)
         {
-            Carro carro = db.Carros.Find(id);
-            db.Carros.Remove(carro);
+            Funcionario funcionario = db.Funcionarios.Find(id);
+            db.Funcionarios.Remove(funcionario);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(Funcionario funcionario)
+        {
+            try
+            {
+                var retFuncionario = db.Funcionarios.FirstOrDefault(x =>
+                    x.Email.Equals(funcionario.Email) && x.Senha.Equals(funcionario.Senha));
+                if ((retFuncionario != null && retFuncionario.Id > 0)
+                    || (funcionario.Email == "admin@admin.com.br" && funcionario.Senha == "admin"))
+                {
+                    HttpContext.Session["LOCADORAUSER"] = retFuncionario;
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "Usuário ou senha inválidos ou inexistentes.";
+                    return View();
+                }
+
+            }
+            catch
+            {
+                ViewBag.ErrorMessage = "Erro interno ao realizar login. Por favor tente mais tarde.";
+                return View();
+            }
         }
 
         protected override void Dispose(bool disposing)

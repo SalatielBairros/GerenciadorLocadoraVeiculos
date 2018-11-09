@@ -17,5 +17,7 @@ namespace LocadoraVeiculos.Infra
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Carro> Carros{ get; set; }
         public DbSet<Aluguel> Alugueis { get; set; }
+        public DbSet<Pagamentos> Pagamentos { get; set; }
+        public DbSet<Funcionario> Funcionarios { get; set; }
     }
 }

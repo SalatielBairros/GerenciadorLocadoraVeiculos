@@ -8,117 +8,119 @@ using System.Web;
 using System.Web.Mvc;
 using LocadoraVeiculos.Infra;
 using LocadoraVeiculos.Models;
-using LocadoraVeiculos.Security;
 
 namespace LocadoraVeiculos.Controllers
 {
-    public class CarrosController : Controller
+    public class PagamentosController : Controller
     {
         private Context db = new Context();
 
-        // GET: Carroes
+        // GET: Pagamentos
         public ActionResult Index()
         {
-            return View(db.Carros.ToList());
+            var pagamentos = db.Pagamentos.Include(p => p.Aluguel).Include(p => p.Funcionario);
+            return View(pagamentos.ToList());
         }
 
-        // GET: Carroes/Details/5
+        // GET: Pagamentos/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Carro carro = db.Carros.Find(id);
-            if (carro == null)
+            Pagamentos pagamentos = db.Pagamentos.Find(id);
+            if (pagamentos == null)
             {
                 return HttpNotFound();
             }
-            return View(carro);
+            return View(pagamentos);
         }
 
-        [SessionAuthorize]
-        // GET: Carroes/Create
+        // GET: Pagamentos/Create
         public ActionResult Create()
         {
+            ViewBag.AluguelId = new SelectList(db.Alugueis, "Id", "Id");
+            ViewBag.FuncionarioId = new SelectList(db.Funcionarios, "Id", "Nome");
             return View();
         }
 
-        // POST: Carroes/Create
+        // POST: Pagamentos/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [SessionAuthorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Modelo,Marca,Tipo,ValorDiaria,Placa,Cor,Ano,Chassi,Quilomeatragem")] Carro carro)
+        public ActionResult Create([Bind(Include = "Id,Data,Valor,FuncionarioId,AluguelId")] Pagamentos pagamentos)
         {
             if (ModelState.IsValid)
             {
-                db.Carros.Add(carro);
+                db.Pagamentos.Add(pagamentos);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(carro);
+            ViewBag.AluguelId = new SelectList(db.Alugueis, "Id", "Id", pagamentos.AluguelId);
+            ViewBag.FuncionarioId = new SelectList(db.Funcionarios, "Id", "Nome", pagamentos.FuncionarioId);
+            return View(pagamentos);
         }
 
-        // GET: Carroes/Edit/5
-        [SessionAuthorize]
+        // GET: Pagamentos/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Carro carro = db.Carros.Find(id);
-            if (carro == null)
+            Pagamentos pagamentos = db.Pagamentos.Find(id);
+            if (pagamentos == null)
             {
                 return HttpNotFound();
             }
-            return View(carro);
+            ViewBag.AluguelId = new SelectList(db.Alugueis, "Id", "Id", pagamentos.AluguelId);
+            ViewBag.FuncionarioId = new SelectList(db.Funcionarios, "Id", "Nome", pagamentos.FuncionarioId);
+            return View(pagamentos);
         }
 
-        // POST: Carroes/Edit/5
+        // POST: Pagamentos/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [SessionAuthorize]
-        public ActionResult Edit([Bind(Include = "Id,Modelo,Marca,Tipo,ValorDiaria,Placa,Cor,Ano,Chassi,Quilomeatragem")] Carro carro)
+        public ActionResult Edit([Bind(Include = "Id,Data,Valor,FuncionarioId,AluguelId")] Pagamentos pagamentos)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(carro).State = EntityState.Modified;
+                db.Entry(pagamentos).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(carro);
+            ViewBag.AluguelId = new SelectList(db.Alugueis, "Id", "Id", pagamentos.AluguelId);
+            ViewBag.FuncionarioId = new SelectList(db.Funcionarios, "Id", "Nome", pagamentos.FuncionarioId);
+            return View(pagamentos);
         }
 
-        // GET: Carroes/Delete/5
-        [SessionAuthorize]
+        // GET: Pagamentos/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Carro carro = db.Carros.Find(id);
-            if (carro == null)
+            Pagamentos pagamentos = db.Pagamentos.Find(id);
+            if (pagamentos == null)
             {
                 return HttpNotFound();
             }
-            return View(carro);
+            return View(pagamentos);
         }
 
-        // POST: Carroes/Delete/5
+        // POST: Pagamentos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [SessionAuthorize]
         public ActionResult DeleteConfirmed(int id)
         {
-            Carro carro = db.Carros.Find(id);
-            db.Carros.Remove(carro);
+            Pagamentos pagamentos = db.Pagamentos.Find(id);
+            db.Pagamentos.Remove(pagamentos);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using LocadoraVeiculos.Infra;
 using LocadoraVeiculos.Models;
+using LocadoraVeiculos.Security;
 
 namespace LocadoraVeiculos.Controllers
 {
@@ -37,6 +38,7 @@ namespace LocadoraVeiculos.Controllers
         }
 
         // GET: Clientes/Create
+        [SessionAuthorize]
         public ActionResult Create()
         {
             return View();
@@ -47,6 +49,7 @@ namespace LocadoraVeiculos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionAuthorize]
         public ActionResult Create([Bind(Include = "Id,Nome,CPF,RG,Telefone,Endereco,Contato,Tipo")] Cliente cliente)
         {
             if (ModelState.IsValid)
@@ -60,6 +63,7 @@ namespace LocadoraVeiculos.Controllers
         }
 
         // GET: Clientes/Edit/5
+        [SessionAuthorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -79,6 +83,7 @@ namespace LocadoraVeiculos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionAuthorize]
         public ActionResult Edit([Bind(Include = "Id,Nome,CPF,RG,Telefone,Endereco,Contato,Tipo")] Cliente cliente)
         {
             if (ModelState.IsValid)
@@ -90,6 +95,7 @@ namespace LocadoraVeiculos.Controllers
             return View(cliente);
         }
 
+        [SessionAuthorize]
         // GET: Clientes/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -108,6 +114,7 @@ namespace LocadoraVeiculos.Controllers
         // POST: Clientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [SessionAuthorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Cliente cliente = db.Clientes.Find(id);
