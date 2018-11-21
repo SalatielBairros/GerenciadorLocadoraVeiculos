@@ -9,6 +9,14 @@ namespace WebServiceClientes.Infra
     public class Context : DbContext
     {
         /// <summary>
+        /// Construtor padrão da classe.
+        /// </summary>
+        public Context() : base("RemoteConnection")
+        {
+
+        }
+
+        /// <summary>
         /// Definição de clientes como tabela do banco de dados.
         /// </summary>
         public DbSet<CustomerModel> Clientes { get; set; }
