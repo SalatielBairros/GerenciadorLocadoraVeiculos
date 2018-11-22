@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebServiceClientes.Models
 {
@@ -23,6 +25,7 @@ namespace WebServiceClientes.Models
         /// </summary>
         [Required]
         [StringLength(maximumLength: 20)]
+        [DisplayName("CPF/CNPJ")]
         public string CPF_CNPJ { get; set; }
         /// <summary>
         /// RG do Cliente
@@ -38,6 +41,11 @@ namespace WebServiceClientes.Models
         /// Status financeiro do cliente
         /// </summary>
         [Required]
+        [DisplayName("Status Financeiro")]
         public StatusFinanceiro StatusFinanceiro { get; set; } = StatusFinanceiro.SemPendencias;
+        /// <summary>
+        /// Endereços do cliente.
+        /// </summary>
+        public virtual ICollection<Enderecos> Enderecos { get; set; }
     }
 }

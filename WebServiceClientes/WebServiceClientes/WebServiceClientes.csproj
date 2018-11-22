@@ -198,6 +198,7 @@
     <Compile Include="Infra\Context.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CustomerModel.cs" />
+    <Compile Include="Models\Enderecos.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\StatusFinanceiro.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

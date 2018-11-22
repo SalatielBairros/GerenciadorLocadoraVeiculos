@@ -572,6 +572,56 @@
             Status financeiro do cliente
             </summary>
         </member>
+        <member name="P:WebServiceClientes.Models.CustomerModel.Enderecos">
+            <summary>
+            Endereços do cliente.
+            </summary>
+        </member>
+        <member name="T:WebServiceClientes.Models.Enderecos">
+            <summary>
+            Endereços Cliente
+            </summary>
+        </member>
+        <member name="P:WebServiceClientes.Models.Enderecos.Id">
+            <summary>
+            Identificador do endereço. Gerado automaticamente
+            </summary>
+        </member>
+        <member name="P:WebServiceClientes.Models.Enderecos.Logradouro">
+            <summary>
+            Logradouro do endereço do cliente
+            </summary>
+        </member>
+        <member name="P:WebServiceClientes.Models.Enderecos.Numero">
+            <summary>
+            Número do cliente
+            </summary>
+        </member>
+        <member name="P:WebServiceClientes.Models.Enderecos.Bairro">
+            <summary>
+            Bairro do endereço do cliente
+            </summary>
+        </member>
+        <member name="P:WebServiceClientes.Models.Enderecos.Cidade">
+            <summary>
+            Cidade onde o endereço é localizado.
+            </summary>
+        </member>
+        <member name="P:WebServiceClientes.Models.Enderecos.Complemento">
+            <summary>
+            Complemento, como apartamento, bloco, referência, entre outros.
+            </summary>
+        </member>
+        <member name="P:WebServiceClientes.Models.Enderecos.ClienteId">
+            <summary>
+            Referência do cliente.
+            </summary>
+        </member>
+        <member name="P:WebServiceClientes.Models.Enderecos.Cliente">
+            <summary>
+            Cliente que possui o endereço.
+            </summary>
+        </member>
         <member name="T:WebServiceClientes.Models.Status">
             <summary>
             Status
