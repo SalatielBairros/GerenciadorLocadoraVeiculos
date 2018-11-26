@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -37,15 +38,20 @@ namespace WebServiceClientes.Models
         /// </summary>
         [Required]
         public Status Status { get; set; } = Status.Ativo;
-        ///// <summary>
-        ///// Status financeiro do cliente
-        ///// </summary>
-        //[Required]
-        //[DisplayName("Status Financeiro")]
-        //public StatusFinanceiro StatusFinanceiro { get; set; } = StatusFinanceiro.SemPendencias;
-        ///// <summary>
-        ///// Endereços do cliente.
-        ///// </summary>
-        ////public virtual ICollection<Enderecos> Enderecos { get; set; }
+        /// <summary>
+        /// Data da última alteração realizada
+        /// </summary>
+        [DisplayName("Data última alteração")]
+        public DateTime DataAlteracao { get; set; } = DateTime.Now;
+        /// <summary>
+        /// Status financeiro do cliente
+        /// </summary>
+        [Required]
+        [DisplayName("Status Financeiro")]
+        public StatusFinanceiro StatusFinanceiro { get; set; } = StatusFinanceiro.SemPendencias;
+        /// <summary>
+        /// Endereços do cliente.
+        /// </summary>
+        public virtual ICollection<Enderecos> Enderecos { get; set; }
     }
 }

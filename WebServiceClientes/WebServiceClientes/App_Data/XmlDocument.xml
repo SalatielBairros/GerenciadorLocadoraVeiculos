@@ -537,6 +537,11 @@
             Definição de clientes como tabela do banco de dados.
             </summary>
         </member>
+        <member name="P:WebServiceClientes.Infra.Context.Enderecos">
+            <summary>
+            Definição de Endereços como tabela do banco de dados.
+            </summary>
+        </member>
         <member name="T:WebServiceClientes.Models.CustomerModel">
             <summary>
             Informações do cliente.
@@ -565,6 +570,21 @@
         <member name="P:WebServiceClientes.Models.CustomerModel.Status">
             <summary>
             Status do cliente
+            </summary>
+        </member>
+        <member name="P:WebServiceClientes.Models.CustomerModel.DataAlteracao">
+            <summary>
+            Data da última alteração realizada
+            </summary>
+        </member>
+        <member name="P:WebServiceClientes.Models.CustomerModel.StatusFinanceiro">
+            <summary>
+            Status financeiro do cliente
+            </summary>
+        </member>
+        <member name="P:WebServiceClientes.Models.CustomerModel.Enderecos">
+            <summary>
+            Endereços do cliente.
             </summary>
         </member>
         <member name="T:WebServiceClientes.Models.Enderecos">

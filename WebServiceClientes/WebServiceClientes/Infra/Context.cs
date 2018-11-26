@@ -20,9 +20,9 @@ namespace WebServiceClientes.Infra
         /// Definição de clientes como tabela do banco de dados.
         /// </summary>
         public DbSet<CustomerModel> Clientes { get; set; }
-        ///// <summary>
-        ///// Definição de Endereços como tabela do banco de dados.
-        ///// </summary>
-        //public DbSet<Enderecos> Enderecos { get; set; }
+        /// <summary>
+        /// Definição de Endereços como tabela do banco de dados.
+        /// </summary>
+        public DbSet<Enderecos> Enderecos { get; set; }
     }
 }

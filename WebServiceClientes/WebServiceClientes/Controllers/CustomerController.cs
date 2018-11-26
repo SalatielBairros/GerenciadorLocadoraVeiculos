@@ -47,7 +47,7 @@ namespace WebServiceClientes.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,CPF_CNPJ,RG,Status")] CustomerModel customerModel)
+        public ActionResult Create([Bind(Include = "Id,Nome,CPF_CNPJ,RG,Status,DataAlteracao,StatusFinanceiro")] CustomerModel customerModel)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace WebServiceClientes.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,CPF_CNPJ,RG,Status")] CustomerModel customerModel)
+        public ActionResult Edit([Bind(Include = "Id,Nome,CPF_CNPJ,RG,Status,DataAlteracao,StatusFinanceiro")] CustomerModel customerModel)
         {
             if (ModelState.IsValid)
             {
