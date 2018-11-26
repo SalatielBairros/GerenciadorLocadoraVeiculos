@@ -37,15 +37,15 @@ namespace WebServiceClientes.Models
         /// </summary>
         [Required]
         public Status Status { get; set; } = Status.Ativo;
-        /// <summary>
-        /// Status financeiro do cliente
-        /// </summary>
-        [Required]
-        [DisplayName("Status Financeiro")]
-        public StatusFinanceiro StatusFinanceiro { get; set; } = StatusFinanceiro.SemPendencias;
-        /// <summary>
-        /// Endereços do cliente.
-        /// </summary>
-        public virtual ICollection<Enderecos> Enderecos { get; set; }
+        ///// <summary>
+        ///// Status financeiro do cliente
+        ///// </summary>
+        //[Required]
+        //[DisplayName("Status Financeiro")]
+        //public StatusFinanceiro StatusFinanceiro { get; set; } = StatusFinanceiro.SemPendencias;
+        ///// <summary>
+        ///// Endereços do cliente.
+        ///// </summary>
+        ////public virtual ICollection<Enderecos> Enderecos { get; set; }
     }
 }

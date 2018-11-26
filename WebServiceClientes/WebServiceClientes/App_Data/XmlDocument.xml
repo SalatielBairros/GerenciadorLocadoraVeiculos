@@ -567,16 +567,6 @@
             Status do cliente
             </summary>
         </member>
-        <member name="P:WebServiceClientes.Models.CustomerModel.StatusFinanceiro">
-            <summary>
-            Status financeiro do cliente
-            </summary>
-        </member>
-        <member name="P:WebServiceClientes.Models.CustomerModel.Enderecos">
-            <summary>
-            Endereços do cliente.
-            </summary>
-        </member>
         <member name="T:WebServiceClientes.Models.Enderecos">
             <summary>
             Endereços Cliente
