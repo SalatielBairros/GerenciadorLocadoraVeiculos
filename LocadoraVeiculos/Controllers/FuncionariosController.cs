@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using LocadoraVeiculos.Infra;
 using LocadoraVeiculos.Models;
+using LocadoraVeiculos.Security;
 
 namespace LocadoraVeiculos.Controllers
 {
@@ -37,6 +38,7 @@ namespace LocadoraVeiculos.Controllers
         }
 
         // GET: Funcionarios/Create
+        [SessionAuthorize]
         public ActionResult Create()
         {
             return View();
@@ -47,6 +49,7 @@ namespace LocadoraVeiculos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionAuthorize]
         public ActionResult Create([Bind(Include = "Id,Nome,Email,Senha")] Funcionario funcionario)
         {
             if (ModelState.IsValid)
@@ -60,6 +63,7 @@ namespace LocadoraVeiculos.Controllers
         }
 
         // GET: Funcionarios/Edit/5
+        [SessionAuthorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -79,6 +83,7 @@ namespace LocadoraVeiculos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SessionAuthorize]
         public ActionResult Edit([Bind(Include = "Id,Nome,Email,Senha")] Funcionario funcionario)
         {
             if (ModelState.IsValid)
@@ -91,6 +96,7 @@ namespace LocadoraVeiculos.Controllers
         }
 
         // GET: Funcionarios/Delete/5
+        [SessionAuthorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -108,6 +114,7 @@ namespace LocadoraVeiculos.Controllers
         // POST: Funcionarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [SessionAuthorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Funcionario funcionario = db.Funcionarios.Find(id);
