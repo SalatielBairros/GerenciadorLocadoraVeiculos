@@ -11,7 +11,7 @@ namespace LocadoraVeiculos.Infra
     {
         public Context() : base("RemoteConnection")
         {
-            
+            this.Configuration.LazyLoadingEnabled = true;
         }
 
         public DbSet<Cliente> Clientes { get; set; }

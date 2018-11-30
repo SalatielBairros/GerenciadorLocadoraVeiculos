@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
 using LocadoraVeiculos.Infra;
 using LocadoraVeiculos.Models;
 using LocadoraVeiculos.Security;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web.Mvc;
 
 namespace LocadoraVeiculos.Controllers
 {
@@ -57,9 +54,16 @@ namespace LocadoraVeiculos.Controllers
         {
             if (ModelState.IsValid)
             {
-                aluguel.Carro.Status = StatusCarro.Reservado;
+                var carro = db.Carros.Find(aluguel.CarroId);
+                if (carro == null) throw new ArgumentException("Carro não encontrado.");
+                carro.Status =
+                    (aluguel.Status == StatusAluguel.Finalizado ? StatusCarro.Disponivel : StatusCarro.Reservado);
+
                 db.Alugueis.Add(aluguel);
                 db.SaveChanges();
+                db.Entry(carro).State = EntityState.Modified;
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
@@ -96,7 +100,12 @@ namespace LocadoraVeiculos.Controllers
         {
             if (ModelState.IsValid)
             {
+                var carro = db.Carros.Find(aluguel.CarroId);
+                if (carro == null) throw new ArgumentException("Carro não encontrado.");
+                carro.Status = aluguel.Status == StatusAluguel.Finalizado ? StatusCarro.Disponivel : StatusCarro.Reservado;
+
                 db.Entry(aluguel).State = EntityState.Modified;
+                db.Entry(carro).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

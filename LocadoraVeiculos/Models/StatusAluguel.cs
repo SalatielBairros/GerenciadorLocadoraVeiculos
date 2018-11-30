@@ -5,6 +5,6 @@
         Reservado,
         EmCurso,
         PendentePagamento,
-        Pago
+        Finalizado
     }
 }
