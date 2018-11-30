@@ -10,7 +10,10 @@ namespace LocadoraVeiculos.Models
         public int Id { get; set; }
         [DataType(DataType.Date)]
         [Required]
-        public DateTime Data { get; set; } = DateTime.Now;
+        [DisplayName("Data Inicial")]
+        public DateTime DataInicial { get; set; } = DateTime.Now;
+        [DisplayName("Data Final")]
+        public DateTime? DataFinal { get; set; } = null;
         [Required]
         [DisplayName("Carro")]
         public int CarroId { get; set; }

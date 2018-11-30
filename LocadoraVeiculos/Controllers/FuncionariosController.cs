@@ -17,12 +17,14 @@ namespace LocadoraVeiculos.Controllers
         private Context db = new Context();
 
         // GET: Funcionarios
+        [SessionAuthorize]
         public ActionResult Index()
         {
             return View(db.Funcionarios.ToList());
         }
 
         // GET: Funcionarios/Details/5
+        [SessionAuthorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
