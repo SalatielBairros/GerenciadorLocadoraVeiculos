@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using LocadoraVeiculos.Infra;
+using LocadoraVeiculos.Models;
+using LocadoraVeiculos.Security;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using LocadoraVeiculos.Infra;
-using LocadoraVeiculos.Models;
-using LocadoraVeiculos.Security;
 
 namespace LocadoraVeiculos.Controllers
 {
@@ -38,7 +35,6 @@ namespace LocadoraVeiculos.Controllers
         }
 
         // GET: Clientes/Create
-        [SessionAuthorize]
         public ActionResult Create()
         {
             return View();
@@ -49,11 +45,11 @@ namespace LocadoraVeiculos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [SessionAuthorize]
         public ActionResult Create([Bind(Include = "Id,Nome,CPF,RG,Telefone,Endereco,Contato,Tipo")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
+                cliente.StatusCadastro = HttpContext.Session["LOCADORAUSER"] != null ? StatusCadastro.Confirmado : StatusCadastro.Solicitado;
                 db.Clientes.Add(cliente);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -86,13 +82,13 @@ namespace LocadoraVeiculos.Controllers
         [SessionAuthorize]
         public ActionResult Edit([Bind(Include = "Id,Nome,CPF,RG,Telefone,Endereco,Contato,Tipo")] Cliente cliente)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(cliente).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(cliente);
+            if (!ModelState.IsValid) return View(cliente);
+
+            cliente.StatusCadastro = HttpContext.Session["LOCADORAUSER"] != null ? StatusCadastro.Confirmado : StatusCadastro.Solicitado;
+
+            db.Entry(cliente).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         [SessionAuthorize]
@@ -130,6 +126,20 @@ namespace LocadoraVeiculos.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [SessionAuthorize]
+        public ActionResult Confirmar(int id)
+        {
+            Cliente cliente = db.Clientes.Find(id);
+            if (cliente == null)
+                throw new ArgumentException("Cliente não encontrado");
+
+            cliente.StatusCadastro = StatusCadastro.Confirmado;
+
+            db.Entry(cliente).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
