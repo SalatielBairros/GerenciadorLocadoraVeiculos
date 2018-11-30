@@ -169,6 +169,7 @@
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Funcionario.cs" />
     <Compile Include="Models\Pagamentos.cs" />
+    <Compile Include="Models\Status.cs" />
     <Compile Include="Models\StatusAluguel.cs" />
     <Compile Include="Models\StatusCadastro.cs" />
     <Compile Include="Models\StatusCarro.cs" />

@@ -23,6 +23,7 @@ namespace LocadoraVeiculos.Models
         [DisplayName("KM")]
         public float Quilomeatragem { get; set; }
         [DisplayName("Situação")]
-        public StatusCarro Status { get; set; } = StatusCarro.Disponivel;
+        public StatusCarro Situacao { get; set; } = StatusCarro.Disponivel;
+        public Status Status { get; set; } = Status.Ativo;
     }
 }

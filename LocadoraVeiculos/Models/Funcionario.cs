@@ -19,5 +19,6 @@ namespace LocadoraVeiculos.Models
         public string Senha { get; set; }
         [DisplayName("Tipo Acesso")]
         public TipoAcessoFuncionario TipoAcesso { get; set; } = TipoAcessoFuncionario.Normal;
+        public Status Status { get; set; } = Status.Ativo;
     }
 }

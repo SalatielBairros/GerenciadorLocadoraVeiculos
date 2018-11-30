@@ -1,7 +1,7 @@
-﻿using System;
-using LocadoraVeiculos.Infra;
+﻿using LocadoraVeiculos.Infra;
 using LocadoraVeiculos.Models;
 using LocadoraVeiculos.Security;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -16,7 +16,7 @@ namespace LocadoraVeiculos.Controllers
         // GET: Alugueis
         public ActionResult Index()
         {
-            var alugueis = db.Alugueis.Include(a => a.Carro).Include(a => a.Cliente);
+            var alugueis = db.Alugueis.Where(x => x.Status == Status.Ativo).Include(a => a.Carro).Include(a => a.Cliente);
             return View(alugueis.ToList());
         }
 
@@ -39,7 +39,7 @@ namespace LocadoraVeiculos.Controllers
         [SessionAuthorize]
         public ActionResult Create()
         {
-            ViewBag.CarroId = new SelectList(db.Carros, "Id", "Modelo");
+            ViewBag.CarroId = new SelectList(db.Carros.Where(x => x.Status == Status.Ativo && x.Situacao == StatusCarro.Disponivel), "Id", "Modelo");
             ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nome");
             return View();
         }
@@ -56,8 +56,8 @@ namespace LocadoraVeiculos.Controllers
             {
                 var carro = db.Carros.Find(aluguel.CarroId);
                 if (carro == null) throw new ArgumentException("Carro não encontrado.");
-                carro.Status =
-                    (aluguel.Status == StatusAluguel.Finalizado ? StatusCarro.Disponivel : StatusCarro.Reservado);
+                carro.Situacao =
+                    (aluguel.Situacao == StatusAluguel.Finalizado ? StatusCarro.Disponivel : StatusCarro.Reservado);
 
                 db.Alugueis.Add(aluguel);
                 db.SaveChanges();
@@ -102,7 +102,7 @@ namespace LocadoraVeiculos.Controllers
             {
                 var carro = db.Carros.Find(aluguel.CarroId);
                 if (carro == null) throw new ArgumentException("Carro não encontrado.");
-                carro.Status = aluguel.Status == StatusAluguel.Finalizado ? StatusCarro.Disponivel : StatusCarro.Reservado;
+                carro.Situacao = aluguel.Situacao == StatusAluguel.Finalizado ? StatusCarro.Disponivel : StatusCarro.Reservado;
 
                 db.Entry(aluguel).State = EntityState.Modified;
                 db.Entry(carro).State = EntityState.Modified;

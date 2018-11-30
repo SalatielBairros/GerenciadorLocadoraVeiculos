@@ -19,6 +19,8 @@ namespace LocadoraVeiculos.Models
         [DisplayName("Cliente")]
         public int ClienteId { get; set; }
         public virtual Cliente Cliente { get; set; }
-        public StatusAluguel Status { get; set; }
+        [DisplayName("Situação")]
+        public StatusAluguel Situacao { get; set; }
+        public Status Status { get; set; } = Status.Ativo;
     }
 }

@@ -18,6 +18,7 @@ namespace LocadoraVeiculos.Models
         public string Endereco { get; set; }
         public string Contato { get; set; }
         public TipoCliente Tipo { get; set; }
+        public Status Status { get; set; } = Status.Ativo;
 
         [DisplayName("Situação Cadastro")]
         public StatusCadastro StatusCadastro { get; set; } = StatusCadastro.Solicitado;

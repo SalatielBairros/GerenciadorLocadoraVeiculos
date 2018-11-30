@@ -19,7 +19,7 @@ namespace LocadoraVeiculos.Controllers
         // GET: Carroes
         public ActionResult Index()
         {
-            return View(db.Carros.ToList());
+            return View(db.Carros.Where(x => x.Status == Status.Ativo).ToList());
         }
 
         // GET: Carroes/Details/5
@@ -118,7 +118,9 @@ namespace LocadoraVeiculos.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Carro carro = db.Carros.Find(id);
-            db.Carros.Remove(carro);
+            if (carro == null) throw new Exception("Cliente não cadastrado.");
+            carro.Status = Status.Inativo;
+            db.Entry(carro).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
