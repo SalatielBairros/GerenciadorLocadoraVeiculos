@@ -17,5 +17,7 @@ namespace LocadoraVeiculos.Models
         [DataType(DataType.Password)]
         [StringLength(maximumLength: 10, MinimumLength = 4, ErrorMessage = "A senha deve conter entre 4 e 10 caracteres")]
         public string Senha { get; set; }
+        [DisplayName("Tipo Acesso")]
+        public TipoAcessoFuncionario TipoAcesso { get; set; } = TipoAcessoFuncionario.Normal;
     }
 }
