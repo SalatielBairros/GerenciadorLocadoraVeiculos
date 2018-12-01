@@ -13,6 +13,11 @@ namespace WebServiceClientes.Models
     public class CustomerModel
     {
         /// <summary>
+        /// Nome de exibição da tabela.
+        /// </summary>
+        public readonly string DisplayName = "Clientes";
+
+        /// <summary>
         /// Identificador do cliente. Gerado automaticamente
         /// </summary>
         [Key]
