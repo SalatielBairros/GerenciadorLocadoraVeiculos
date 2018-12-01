@@ -11,6 +11,9 @@ using WebServiceClientes.Models;
 
 namespace WebServiceClientes.Controllers
 {
+    /// <summary>
+    /// Serviços relacionados ao cliente.
+    /// </summary>
     public class CustomerController : Controller
     {
         private Context db = new Context();
