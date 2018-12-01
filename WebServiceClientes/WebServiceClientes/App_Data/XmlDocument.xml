@@ -481,6 +481,11 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="T:WebServiceClientes.Controllers.CustomerController">
+            <summary>
+            Serviços relacionados ao cliente.
+            </summary>
+        </member>
         <member name="T:WebServiceClientes.Controllers.CustomerModelsController">
             <summary>
             Serviços relacionados aos clientes.
@@ -521,6 +526,18 @@
             </summary>
             <param name="id">Cliente a ser removido</param>
             <returns></returns>
+        </member>
+        <member name="T:WebServiceClientes.Helpers.EnumHelper">
+            <summary>
+            Métodos auxiliares de extensão para se trabalhar com enumeradores.
+            </summary>
+        </member>
+        <member name="M:WebServiceClientes.Helpers.EnumHelper.GetDescription(System.Enum)">
+            <summary>
+            Busca descrição do Enum (atributo description)
+            </summary>
+            <param name="this">Enum a ter sua descrição buscada.</param>
+            <returns>Descrição do enumerador</returns>
         </member>
         <member name="T:WebServiceClientes.Infra.Context">
             <summary>
@@ -582,6 +599,11 @@
             Status financeiro do cliente
             </summary>
         </member>
+        <member name="P:WebServiceClientes.Models.CustomerModel.DescricaoStatusFinanceiro">
+            <summary>
+            Descrição do Status financeiro. Apenas informativo.
+            </summary>
+        </member>
         <member name="P:WebServiceClientes.Models.CustomerModel.Enderecos">
             <summary>
             Endereços do cliente.
@@ -639,12 +661,12 @@
         </member>
         <member name="F:WebServiceClientes.Models.Status.Inativo">
             <summary>
-            Inativo no sistema. Corresponde ao valor 0
+            Inativo no sistema.
             </summary>
         </member>
         <member name="F:WebServiceClientes.Models.Status.Ativo">
             <summary>
-            Ativo no sistema. Corresponde ao valor 1.
+            Ativo no sistema.
             </summary>
         </member>
         <member name="T:WebServiceClientes.Models.StatusFinanceiro">

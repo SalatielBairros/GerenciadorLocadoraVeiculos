@@ -6,11 +6,11 @@
   public enum Status
   {
     /// <summary>
-    /// Inativo no sistema. Corresponde ao valor 0
+    /// Inativo no sistema.
     /// </summary>
     Inativo = 0,
     /// <summary>
-    /// Ativo no sistema. Corresponde ao valor 1.
+    /// Ativo no sistema.
     /// </summary>
     Ativo = 1
   }

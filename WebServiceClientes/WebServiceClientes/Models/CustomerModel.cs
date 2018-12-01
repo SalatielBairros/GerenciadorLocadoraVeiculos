@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using WebServiceClientes.Helpers;
 
 namespace WebServiceClientes.Models
 {
@@ -41,7 +43,7 @@ namespace WebServiceClientes.Models
         /// <summary>
         /// Data da última alteração realizada
         /// </summary>
-        [DisplayName("Data última alteração")]
+        [DisplayName("Última alteração")]
         public DateTime DataAlteracao { get; set; } = DateTime.Now;
         /// <summary>
         /// Status financeiro do cliente
@@ -49,6 +51,12 @@ namespace WebServiceClientes.Models
         [Required]
         [DisplayName("Status Financeiro")]
         public StatusFinanceiro StatusFinanceiro { get; set; } = StatusFinanceiro.SemPendencias;
+
+        /// <summary>
+        /// Descrição do Status financeiro. Apenas informativo.
+        /// </summary>
+        [NotMapped]
+        public string DescricaoStatusFinanceiro => StatusFinanceiro.GetDescription();
         /// <summary>
         /// Endereços do cliente.
         /// </summary>

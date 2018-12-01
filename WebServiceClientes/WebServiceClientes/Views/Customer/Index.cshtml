@@ -8,7 +8,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Novo", "Create")
 </p>
 <table class="table">
     <tr>
@@ -51,7 +51,7 @@
             @Html.DisplayFor(modelItem => item.DataAlteracao)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.StatusFinanceiro)
+            @Html.DisplayFor(modelItem => item.DescricaoStatusFinanceiro)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
