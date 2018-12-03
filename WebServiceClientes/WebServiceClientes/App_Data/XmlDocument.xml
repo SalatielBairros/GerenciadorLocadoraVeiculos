@@ -564,6 +564,11 @@
             Informações do cliente.
             </summary>
         </member>
+        <member name="F:WebServiceClientes.Models.CustomerModel.DisplayName">
+            <summary>
+            Nome de exibição da tabela.
+            </summary>
+        </member>
         <member name="P:WebServiceClientes.Models.CustomerModel.Id">
             <summary>
             Identificador do cliente. Gerado automaticamente

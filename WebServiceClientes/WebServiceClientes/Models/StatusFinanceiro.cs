@@ -20,7 +20,7 @@ namespace WebServiceClientes.Models
         /// <summary>
         /// Cliente inadimplente, ou seja, com débitos vencidos.
         /// </summary>
-        [Description("Inadimplemnte")]
+        [Description("Inadimplente")]
         Inadimplente = 2
     }
 }
